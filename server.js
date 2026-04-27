@@ -13,11 +13,9 @@ const FROM_EMAIL = process.env.FROM_EMAIL;
 const FRONTEND = process.env.FRONTEND_URL || '*';
 
 app.use(cors({ origin: FRONTEND }));
-app.use(express.json());
 app.use('/webhook', express.raw({ type: 'application/json' }));
-
+app.use(express.json());
 app.get('/', (req, res) => res.json({ status: 'ok' }));
-
 app.post('/create-payment-intent', async (req, res) => {
   try {
     const { email, name } = req.body;
